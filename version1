@@ -1,0 +1,103 @@
+#The Smolov Squat Program is a 13 week strength training program with 4 main phases.
+#The second phase called the Base Cycle is the focus of this program
+#This calculator takes an individual's one rep max (maximum amount of weight they can squat for one rep) and program start date
+#and outputs a table with the dates, reps, sets and weights they will be squatting
+
+import datetime
+from datetime import datetime,timedelta
+
+from tabulate import tabulate
+
+Starting_1RM = input("Enter your 1RM Squat in lbs:")
+Starting_1RM = int(Starting_1RM)
+
+Starting_Date = input("Enter the date you will be starting this program in format 'MMDDYY':")
+Starting_Date = datetime.strptime(Starting_Date,"%m%d%y")
+
+def round_to (n, precision):
+    correction = 0.5 if n>= 0 else -0.5
+    return int(n/precision+correction)*precision
+def round_to_5(n):
+    return round_to(n,5)
+
+W1D1 = Starting_Date
+W1D1W = round_to_5(0.7*Starting_1RM)
+W1D1S = 4
+W1D1R = 9
+
+W1D2 = Starting_Date + timedelta(days=2)
+W1D2W = round_to_5(0.75*Starting_1RM)
+W1D2S = 5
+W1D2R = 7
+
+W1D3 = Starting_Date + timedelta(days=4)
+W1D3W = round_to_5(0.8*Starting_1RM)
+W1D3S = 7
+W1D3R = 5
+
+W1D4 = Starting_Date + timedelta(days=5)
+W1D4W = round_to_5(0.85*Starting_1RM)
+W1D4S = 10
+W1D4R = 3
+
+W2D1 = W1D1 + timedelta(days=7)
+W2D1W = round_to_5(0.725*Starting_1RM)
+W2D1S = 4
+W2D1R = 9
+
+W2D2 = W1D2 + timedelta(days=7)
+W2D2W = round_to_5(0.775*Starting_1RM)
+W2D2S = 5
+W2D2R = 7
+
+W2D3 = W1D3 +timedelta(days=7)
+W2D3W = round_to_5(0.825*Starting_1RM)
+W2D3S = 7
+W2D3R = 5
+
+W2D4 = W1D4 + timedelta(days=7)
+W2D4W = round_to_5(0.875*Starting_1RM)
+W2D4S = 10
+W2D4R = 3
+
+W3D1 = W2D1 + timedelta(days=7)
+W3D1W = round_to_5(0.75*Starting_1RM)
+W3D1S = 4
+W3D1R = 9
+
+W3D2 = W2D2 + timedelta(days=7)
+W3D2W = round_to_5(0.8*Starting_1RM)
+W3D2S = 5
+W3D2R = 7
+
+W3D3 = W2D3 + timedelta(days=7)
+W3D3W = round_to_5(0.85*Starting_1RM)
+W3D3S = 7
+W3D3R = 5
+
+W3D4 = W2D4 + timedelta(days=7)
+W3D4W = round_to_5(0.9*Starting_1RM)
+W3D4S = 10
+W3D4R = 3
+
+W4D1 = W3D3 + timedelta(days=7)
+W4D1W = "MAX"
+
+table_data = [["Week 1", "1", W1D1,W1D1S,W1D1R,W1D1W],
+              ["Week 1", "2", W1D2,W1D2S,W1D2R,W1D2W],
+              ["Week 1", "3", W1D3,W1D3S,W1D3R,W1D3W],
+              ["Week 1", "4", W1D4,W1D4S,W1D4R,W1D4W],
+              ["Week 2", "1", W2D1,W2D1S,W2D1R,W2D1W],
+              ["Week 2", "2", W2D2,W2D2S, W2D2R,W2D2W],
+              ["Week 2", "3", W2D3,W2D3S,W2D3R,W2D3W],
+              ["Week 2", "4", W2D4,W2D4S,W2D4R,W2D4W],
+              ["Week 3", "1", W3D1,W3D1S,W3D1R,W3D1W],
+              ["Week 3","2", W3D2,W3D2S,W3D2R,W3D2W],
+              ["Week 3","3", W3D3, W3D3S, W3D3R, W3D3W],
+              ["Week 3", "4", W3D4,W3D4S,W3D4R,W3D4W],
+              ["Week 4", "Testing Day", W4D1, "As Needed","1","MAX!"]]
+
+table_headers = ["Week","Day", "Date","Sets","Repetitions","Weight"]
+
+print(tabulate(table_data,headers = table_headers, tablefmt = "grid"))
+
